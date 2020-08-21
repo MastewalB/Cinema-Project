@@ -3,6 +3,7 @@
 This is a flask web App and API for maintaing and interacting with a Cinemas.
 
 ## TO-DO
+
     - Build database for movies in the cinema and cinema Hall capacity.
     - create users with diffrent role.
     - API and website to access schedule of the cinema and movies.
@@ -10,7 +11,9 @@ This is a flask web App and API for maintaing and interacting with a Cinemas.
     - create interactive DashBoard for cinema admistrators.
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
