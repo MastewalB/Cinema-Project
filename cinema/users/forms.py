@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, RadioField, TextField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, RadioField, TextField, DecimalField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from cinema.models import User
@@ -33,7 +33,6 @@ class LoginForm(FlaskForm):
     
     email = StringField('Email', validators=[DataRequired(),Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
@@ -59,3 +58,13 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('The Email is already Taken')
 
+
+class EditMovieForm(FlaskForm):
+    title = StringField('title', validators=[DataRequired()])
+    cover_image = FileField( 'Cover Image', validators=[FileAllowed(['jpg','png'])] )
+    rating = DecimalField('rating', validators=[DataRequired()])
+    
+    trailer = FileField( 'movie trailer', validators=[FileAllowed(['mp4','mkv'])] )
+    genres = StringField('genres', validators=[DataRequired()])
+    language = StringField('language', validators=[DataRequired()])
+    plot = TextField('plot', validators=[DataRequired()])
