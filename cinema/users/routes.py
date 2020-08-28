@@ -6,14 +6,15 @@ from cinema.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from ..models import Movie, User, Role, Cinema
 from flask_login import login_user, current_user, logout_user, login_required
 
+users = Blueprint('users', __name__)
 
-@app.route("/")
-@app.route("/home")
+@users.route("/")
+@users.route("/home")
 def home():
     return render_template("home.html")
 
 
-@app.route("/register", methods=['GET', 'POST'])
+@users.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -26,7 +27,7 @@ def register():
         return render_template('register.html', form=form)
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@users.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -42,7 +43,7 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 
-@app.route("/account", methods=['GET', 'POST'])
+@users.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
@@ -60,4 +61,4 @@ def account():
     return render_template('account.html', title='Account', form=form)
 
 
-users = Blueprint('users', __name__)
+

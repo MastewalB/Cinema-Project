@@ -6,3 +6,5 @@ venv/
 
 #Byte-Compiled python files
 __pycache__/
+
+.idea/
