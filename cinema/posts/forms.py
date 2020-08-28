@@ -26,4 +26,4 @@ class EditMovieForm(FlaskForm):
     trailer = FileField( 'movie trailer', validators=[FileAllowed(['mp4','mkv'])] )
     genres = StringField('genres', validators=[DataRequired()])
     language = StringField('language', validators=[DataRequired()])
-    plot = TextField('plot', validators=[DataRequired()])
+    plot = TextAreaField('plot', validators=[DataRequired()])
