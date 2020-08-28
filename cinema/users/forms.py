@@ -59,12 +59,18 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('The Email is already Taken')
 
 
-class EditMovieForm(FlaskForm):
-    title = StringField('title', validators=[DataRequired()])
-    cover_image = FileField( 'Cover Image', validators=[FileAllowed(['jpg','png'])] )
-    rating = DecimalField('rating', validators=[DataRequired()])
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(),Email()])
+    submit = SubmitField('Request Password Reset')
+
+    def valiate_email(self, email):
+
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('There is no Account with that E-mail. You must register first.')
     
-    trailer = FileField( 'movie trailer', validators=[FileAllowed(['mp4','mkv'])] )
-    genres = StringField('genres', validators=[DataRequired()])
-    language = StringField('language', validators=[DataRequired()])
-    plot = TextField('plot', validators=[DataRequired()])
+class ResetPasswordForm(FlaskForm):
+    
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])    
+    submit = SubmitField('Reset password')
