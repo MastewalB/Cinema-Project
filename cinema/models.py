@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
-from cinema import current_app
+from cinema import db
 from flask_sqlalchemy import SQLAlchemy
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
@@ -10,7 +10,7 @@ class Movie(db.Model):
     imdb_id = db.Column( db.String)
     title = db.Column( db.String(50), nullable=False )
     cover_image = db.Column( db.String(20), nullable=False )
-    rating = db.Column( db.Integer )
+    rating = db.Column( db.Float )
     trailer = db.Column( db.String )
     genres = db.Column( db.String )
     language = db.Column( db.String )
