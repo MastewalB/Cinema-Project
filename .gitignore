@@ -1,0 +1,10 @@
+#Virtual Enviroment
+venv/
+
+#vscode
+.vscode
+
+#Byte-Compiled python files
+__pycache__/
+
+.idea/
