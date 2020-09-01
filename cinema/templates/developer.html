@@ -1,0 +1,8 @@
+{% extends " layout.html" %}
+{%block content%}
+    {%  for developer_messg in developer_messg%}
+        <div class="developer">
+            {{ developer_mssg}}
+        </div>
+    <button{{url_for('developer')}}>confirm</button>
+{% endblock %}
