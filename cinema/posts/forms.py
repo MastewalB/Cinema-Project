@@ -17,6 +17,7 @@ class MoviePostForm(FlaskForm):
     language = SelectField('Language', choices=LANGUAGE_CHOICES)
     
     submit = SubmitField('Add')
+    
 
 class EditMovieForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
