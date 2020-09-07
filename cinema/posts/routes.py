@@ -2,10 +2,6 @@ from flask import (render_template, url_for, flash,
                    redirect, request, abort, Blueprint)
 
 from flask_login import login_required, current_user
-<<<<<<< HEAD
-=======
-
->>>>>>> a8f2035120a34d53036383314ee64ed0cd16ee26
 from cinema import db
 from cinema.models import Movie
 from cinema.posts.forms import MoviePostForm, ScheduleForm, EditMovieForm
@@ -27,10 +23,12 @@ def new_post():
     return render_template('create_post.html', title='New Post', form=form, legend='New Post')
 
 
-@movies.route("/new_schedule", methods=['GET', 'POST'])
+@login_required
+@movies.route("/movies/new_schedule", methods=['GET', 'POST'])
 def new_schedule():
     form = ScheduleForm()
+
     if form.validate_on_submit():
-        #schedule will be added to database
+        # schedule will be added to database
         flash("Schedule has been Added.")
         return render_template('new_schedule.html', form=form)

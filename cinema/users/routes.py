@@ -1,8 +1,7 @@
 # Import others when you use them
 from flask import Blueprint
 from flask import render_template, url_for, flash, redirect, request
-import cinema
-from cinema.users import db
+from cinema import db
 from cinema.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from ..models import User
 from flask_login import login_user, current_user, logout_user, login_required
@@ -14,7 +13,8 @@ users = Blueprint('users', __name__)
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        username = User(username=form.username.data, email=form.email.data, gender=form.gender.data)
+        username = User(username=form.username.data,
+                        email=form.email.data, gender=form.gender.data)
 
         password = User(password=form.password.data)
         db.add(password)
@@ -22,7 +22,10 @@ def register():
 
         flash('Your account has been created!, wait till you get the confirmation code')
         return redirect(url_for('login'))
-        return render_template('register.html', form=form)
+    return render_template('register.html', form=form)
+
+# use bcrypt
+# if
 
 
 @users.route("/login", methods=['GET', 'POST'])
@@ -47,9 +50,10 @@ def logout():
     return redirect(url_for('home'))
 
 
+@login_required
 @users.route("/developer", methods=['GET', 'POST'])
 def developer():
-    developer_mssg = register.username
+    developer_msg = register.username
     db.session.add(developer_mssg)
     db.commit()
     flash("you added a user!")
@@ -73,6 +77,7 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    image_file = url_for(
+        'static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)

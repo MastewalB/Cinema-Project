@@ -38,6 +38,8 @@ class EditMovieForm(FlaskForm):
 
 
 class ScheduleForm(FlaskForm):
+
     schedule = DateTimeField(
         'Pick a Date', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
+
     submit = SubmitField("Save Schedule")

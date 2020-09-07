@@ -30,7 +30,7 @@ class User(db.Model):
 
 
 class Role(db.Model):
-    id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
+    id = db.Column(db.Integer(), primary_key=True,  nullable=False)
     role = db.Column(db.String(15))
 
 
@@ -52,7 +52,8 @@ class Seat(db.Model):
 class Screening(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'))
-    auditorium_id = db.Column(db.datetime, nullable=False)
+
+    auditorium_id = db.Column(db.Integer, nullable=False)
 
 
 class Reservation(db.Model):
