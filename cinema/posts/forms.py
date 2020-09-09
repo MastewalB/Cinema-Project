@@ -22,6 +22,11 @@ class MoviePostForm(FlaskForm):
     submit = SubmitField('Add')
 
 
+class SearchForm(FlaskForm):
+    title = StringField('Enter the title', validators=[DataRequired()])
+    submit = SubmitField('Search')
+
+
 class EditMovieForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     cover_image = FileField('Cover Image', validators=[
@@ -38,8 +43,9 @@ class EditMovieForm(FlaskForm):
 
 
 class ScheduleForm(FlaskForm):
-
+    movie = SelectField('Select Movie', choices=[])
     schedule = DateTimeField(
         'Pick a Date', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
 
+    auditorium = SelectField('Select Auditorium', choices=[])
     submit = SubmitField("Save Schedule")
